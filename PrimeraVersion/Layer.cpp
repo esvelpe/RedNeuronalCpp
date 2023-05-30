@@ -22,7 +22,7 @@ double sigmoidDerivative(double x)
 // Definición de una capa de la red neuronal
 Layer::Layer(int inputSize, int outputSize)
 {
-    this->activationFunctions[0] = {sigmoid};
+    // this->activationFunctions[0] = sigmoid;
     weights = new vector<vector<double>>;
     weights->resize(inputSize, vector<double>(outputSize, 0.0));
     biases = new vector<double>;

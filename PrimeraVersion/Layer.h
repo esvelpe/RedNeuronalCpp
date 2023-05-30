@@ -19,5 +19,5 @@ private:
     vector<double> *biases;
     vector<vector<double>> *deltaWeights;
     vector<double> *deltaBiases;
-    double (*activationFunctions[4])(double);
+    // double (*activationFunctions[4])(double);
 };
