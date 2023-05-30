@@ -82,6 +82,19 @@ Matrix Matrix::operator+(const Matrix &matriz)
     }
 }
 
+void Matrix::operator=(const Matrix &matriz)
+{
+    for (int i = 0; i < this->getRows(); i++)
+    {
+        for (int j = 0; j < this->getCols(); j++)
+        {
+            this->matrix->at(i).at(j) = matriz.matrix->at(i).at(j);
+        }
+    }
+    this->n_cols = matriz.n_cols;
+    this->n_rows = matriz.n_rows;
+}
+
 void Matrix::T()
 {
     vector<vector<double>> *matriz_aux = new vector<vector<double>>;
@@ -98,19 +111,10 @@ void Matrix::T()
             this->matrix->at(i).at(j) = matriz_aux->at(j).at(i);
         }
     }
+    swap(this->n_cols, this->n_rows);
 
     delete matriz_aux;
 }
-
-// int Matrix::getCols() const
-// {
-//     return this->matrix->at(0).size();
-// }
-
-// int Matrix::getRows() const
-// {
-//     return this->matrix->size();
-// }
 
 int Matrix::getCols() const
 {

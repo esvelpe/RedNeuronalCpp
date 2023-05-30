@@ -11,6 +11,7 @@ public:
     void T();
     Matrix operator*(const Matrix &);
     Matrix operator+(const Matrix &);
+    void operator=(const Matrix &);
     void printMatrix() const;
     int getCols() const;
     int getRows() const;

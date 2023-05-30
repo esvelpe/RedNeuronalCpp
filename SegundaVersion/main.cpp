@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Matrix.h"
+#include "Layer.h"
 
 using namespace std;
 
@@ -32,6 +33,16 @@ int main()
     matrix1.T();
     matrix1.printMatrix();
     //  matrix1.printMatrix();
+
+    Layer layer1(5, "relu", 10);
+
+    layer1.printBias();
+
+    cout << endl;
+
+    layer1.printWeights();
+
+    cout << endl;
 
     return 0;
 }
