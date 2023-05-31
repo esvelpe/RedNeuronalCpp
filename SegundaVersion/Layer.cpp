@@ -13,41 +13,60 @@ using namespace std;
 default_random_engine generator;
 normal_distribution<double> distribution(0.0, 2.0);
 
-double sigmoid(double x, bool derivative = false)
+vector<vector<double>> sigmoid(vector<double> &x, int size, bool derivative = false)
 {
+    vector<vector<double>> output(size, vector<double>(1, 0.0));
     if (derivative)
     {
-        return exp(-x) / (pow(exp(-x) + 1, 2));
+
+        for (int i = 0; i < size; i++)
+        {
+            output.at(i).at(0) = exp(-x.at(i)) / (pow(exp(-x.at(i)) + 1, 2));
+        }
+        return output;
     }
     else
     {
-        return 1 / (1 + exp(-x));
+        for (int i = 0; i < size; i++)
+        {
+            output.at(i).at(0) = 1 / (1 + exp(-x.at(i)));
+        }
+        return output;
     }
 }
 
-double relu(double x, bool derivative = false)
+vector<vector<double>> relu(vector<double> &x, int size, bool derivative = false)
 {
+    vector<vector<double>> output(size, vector<double>(1, 0.0));
     if (derivative)
     {
-        if (x <= 0.0)
+        for (int i = 0; i < size; i++)
         {
-            return 0.0;
+            if (x.at(i) <= 0.0)
+            {
+                output.at(i).at(0) = 0.0;
+            }
+            else
+            {
+                output.at(i).at(0) = 1.0;
+            }
         }
-        else
-        {
-            return 1.0;
-        }
+        return output;
     }
     else
     {
-        if (x <= 0.0)
+        for (int i = 0; i < size; i++)
         {
-            return 0.0;
+            if (x.at(i) <= 0.0)
+            {
+                output.at(i).at(0) = 0.0;
+            }
+            else
+            {
+                output.at(i).at(0) = x.at(i);
+            }
         }
-        else
-        {
-            return x;
-        }
+        return output;
     }
 }
 
@@ -80,11 +99,11 @@ void Layer::setActivation(string activation_function)
 
 void Layer::setBias(int unidades)
 {
-    this->bias = new vector<double>;
-    bias->resize(unidades, 0.0);
+    this->bias = new vector<vector<double>>;
+    bias->resize(unidades, vector<double>(1, 0.0));
     for (int i = 0; i < unidades; i++)
     {
-        bias->at(i) = distribution(generator);
+        bias->at(i).at(0) = distribution(generator);
     }
 }
 
@@ -106,7 +125,7 @@ vector<vector<double>> *Layer::getWeights() const
     return this->weights;
 }
 
-vector<double> *Layer::getBias() const
+vector<vector<double>> *Layer::getBias() const
 {
     return this->bias;
 }
@@ -119,6 +138,11 @@ int Layer::getNumeroNeuronas() const
 int Layer::getInputShape() const
 {
     return this->input_shape;
+}
+
+vector<vector<double>> (*Layer::getFunction())(vector<double> &, int, bool)
+{
+    return this->activation_function;
 }
 
 void Layer::printWeights() const
@@ -140,7 +164,7 @@ void Layer::printBias() const
     cout << "[" << setw(2);
     for (int i = 0; i < this->numeroNeuronas; i++)
     {
-        cout << setw(2) << this->bias->at(i);
+        cout << setw(2) << this->bias->at(i).at(0);
         cout << endl;
     }
     cout << "]";

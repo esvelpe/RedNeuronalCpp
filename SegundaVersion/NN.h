@@ -2,6 +2,7 @@
 #include <numeric>
 #include <cmath>
 #include "Layer.h"
+#include "Matrix.h"
 
 using namespace std;
 
@@ -12,12 +13,13 @@ public:
     ~NN();
     void add(Layer &);
     void compile();
-    void train();
+    void train(Matrix &, Matrix &, double, int, int);
     void predict();
 
 private:
     vector<Layer> *layers;
-    vector<vector<double>> *weights;
-    vector<double> *biases;
+    vector<Matrix> *weights;
+    vector<Matrix> *biases;
+    vector<vector<vector<double>> (*)(vector<double> &, int, bool)> *functions;
     int numCapas;
 };

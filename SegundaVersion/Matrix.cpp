@@ -116,6 +116,11 @@ void Matrix::T()
     delete matriz_aux;
 }
 
+vector<vector<double>> *Matrix::getMatrix() const
+{
+    return this->matrix;
+}
+
 int Matrix::getCols() const
 {
     return this->n_cols;

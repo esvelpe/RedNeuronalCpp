@@ -15,14 +15,15 @@ public:
     void printWeights() const;
     void printBias() const;
     vector<vector<double>> *getWeights() const;
-    vector<double> *getBias() const;
+    vector<vector<double>> *getBias() const;
     int getNumeroNeuronas() const;
     int getInputShape() const;
+    vector<vector<double>> (*getFunction())(vector<double> &, int, bool);
 
 private:
     int numeroNeuronas;
     int input_shape;
     vector<vector<double>> *weights;
-    vector<double> *bias;
-    double (*activation_function)(double, bool);
+    vector<vector<double>> *bias;
+    vector<vector<double>> (*activation_function)(vector<double> &, int, bool);
 };
