@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Matrix.h"
 
 using namespace std;
 
@@ -18,12 +19,13 @@ public:
     vector<vector<double>> *getBias() const;
     int getNumeroNeuronas() const;
     int getInputShape() const;
-    vector<vector<double>> (*getFunction())(vector<double> &, int, bool);
+    vector<vector<double>> (*getFunction())(vector<vector<double>> *, int, int, bool);
+    Matrix forward(Matrix &);
 
 private:
     int numeroNeuronas;
     int input_shape;
     vector<vector<double>> *weights;
     vector<vector<double>> *bias;
-    vector<vector<double>> (*activation_function)(vector<double> &, int, bool);
+    vector<vector<double>> (*activation_function)(vector<vector<double>> *, int, int, bool);
 };

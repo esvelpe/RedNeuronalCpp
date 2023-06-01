@@ -6,6 +6,13 @@
 
 using namespace std;
 
+Matrix::Matrix()
+{
+    this->n_cols = 0;
+    this->n_rows = 0;
+    this->matrix = new vector<vector<double>>;
+}
+
 Matrix::Matrix(int num_col, int num_row, double init)
 {
     this->matrix = new vector<vector<double>>;
@@ -75,11 +82,67 @@ Matrix Matrix::operator+(const Matrix &matriz)
         }
         return matriz_operacion;
     }
+    else if ((this->getCols() == matriz.getRows()) && (matriz.getCols() == 1))
+    {
+        for (int i = 0; i < this->getRows(); i++)
+        {
+            for (int j = 0; j < this->getCols(); j++)
+            {
+                matriz_operacion.matrix->at(i).at(j) = this->matrix->at(i).at(j) + matriz.matrix->at(j).at(0);
+            }
+        }
+        return matriz_operacion;
+    }
     else
     {
         cout << "No se puede realizar la operación por las dimensiones" << endl;
         exit(1);
     }
+}
+
+Matrix Matrix::operator-(const Matrix &matriz)
+{
+    Matrix matriz_operacion(this->getCols(), this->getRows(), 0.0);
+    if ((this->getCols() == matriz.getCols()) && (this->getRows() == matriz.getRows()))
+    {
+        for (int i = 0; i < this->getRows(); i++)
+        {
+            for (int j = 0; j < this->getCols(); j++)
+            {
+                matriz_operacion.matrix->at(i).at(j) = this->matrix->at(i).at(j) - matriz.matrix->at(i).at(j);
+            }
+        }
+        return matriz_operacion;
+    }
+    else if ((this->getCols() == matriz.getRows()) && (matriz.getCols() == 1))
+    {
+        for (int i = 0; i < this->getRows(); i++)
+        {
+            for (int j = 0; j < this->getCols(); j++)
+            {
+                matriz_operacion.matrix->at(i).at(j) = this->matrix->at(i).at(j) - matriz.matrix->at(j).at(0);
+            }
+        }
+        return matriz_operacion;
+    }
+    else
+    {
+        cout << "No se puede realizar la operación por las dimensiones" << endl;
+        exit(1);
+    }
+}
+
+Matrix Matrix::operator%(const Matrix &matriz)
+{
+    Matrix matriz_operacion(this->getRows(), this->getCols(), 0.0);
+    for (int i = 0; i < this->getRows(); i++)
+    {
+        for (int j = 0; j < this->getCols(); j++)
+        {
+            matriz_operacion.matrix->at(i).at(j) = this->matrix->at(i).at(j) * matriz.matrix->at(i).at(j);
+        }
+    }
+    return matriz_operacion;
 }
 
 void Matrix::operator=(const Matrix &matriz)
