@@ -15,6 +15,7 @@ public:
     void setBias(int);
     void printWeights() const;
     void printBias() const;
+    void operator=(const Layer &);
     vector<vector<double>> *getWeights() const;
     vector<vector<double>> *getBias() const;
     int getNumeroNeuronas() const;

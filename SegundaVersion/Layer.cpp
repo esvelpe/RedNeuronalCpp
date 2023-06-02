@@ -89,12 +89,53 @@ Layer::Layer(int unidades, string activation_function, int input_shape)
     setActivation(activation_function);
     setWeights(unidades, input_shape);
     setBias(unidades);
+    cout << "construye layer con uni=" << unidades << " y input shape: " << input_shape << endl;
 }
 
 Layer::~Layer()
 {
-    delete bias;
-    delete weights;
+
+    if ((this->bias != NULL) && (this->weights != NULL))
+    {
+        cout << "Entra a destructor de Layer con uni=" << this->numeroNeuronas << " y input_shape=" << this->input_shape << endl;
+        delete this->bias;
+        this->bias = NULL;
+        delete this->weights;
+        this->weights = NULL;
+    }
+    cout << "Sale de destructor de Layer" << endl;
+}
+
+void Layer::operator=(const Layer &matriz)
+{
+    cout << "entra al operador asignación" << endl;
+    if (matriz.weights != NULL)
+    {
+        delete weights;
+        this->weights = new vector<vector<double>>;
+        this->weights->resize(matriz.getInputShape(), vector<double>(matriz.getNumeroNeuronas(), 0.0));
+        for (int i = 0; i < matriz.getInputShape(); i++)
+        {
+            for (int j = 0; j < matriz.getNumeroNeuronas(); j++)
+            {
+                this->weights->at(i).at(j) = matriz.weights->at(i).at(j);
+            }
+        }
+    }
+
+    if (matriz.bias != NULL)
+    {
+        delete bias;
+        this->bias = new vector<vector<double>>;
+        this->bias->resize(matriz.getNumeroNeuronas(), vector<double>(1, 0.0));
+        for (int i = 0; i < matriz.getInputShape(); i++)
+        {
+            this->bias->at(i).at(0) = matriz.bias->at(i).at(0);
+        }
+    }
+
+    this->numeroNeuronas = matriz.numeroNeuronas;
+    this->input_shape = matriz.input_shape;
 }
 
 void Layer::setActivation(string activation_function)

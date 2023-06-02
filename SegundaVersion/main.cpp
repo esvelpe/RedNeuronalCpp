@@ -8,8 +8,10 @@ int main()
 {
     vector<vector<double>> matriz1 = {{1.0, 2.0, 1.0}, {2.0, 1.0, 2.0}, {1.0, 1.0, 1.0}, {1.0, 1.0, 1.0}, {2.0, 2.0, 2.0}, {1.0, 1.0, 2.0}};
     Matrix matrix1(matriz1);
+    matrix1.printMatrix();
     vector<vector<double>> matriz2 = {{1.0}, {0.0}, {0.0}, {0.0}, {1.0}, {0.0}};
     Matrix matrix2(matriz2);
+    matrix2.printMatrix();
     NN model;
     Layer layer1(3, "relu", 6);
     layer1.printWeights();
@@ -18,8 +20,9 @@ int main()
     Layer layer3(1, "sigmoid", 4);
     layer3.printWeights();
     model.add(layer1);
+    layer1.printWeights();
     model.add(layer2);
-    // model.add(layer3);
+    model.add(layer3);
     cout << "sigue" << endl;
     // model.compile();
     //  model.printWeights();

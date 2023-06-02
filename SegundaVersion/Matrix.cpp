@@ -35,6 +35,7 @@ Matrix::Matrix(vector<vector<double>> &matriz)
 
 Matrix::~Matrix()
 {
+    cout << "Entra al destructor de matrix" << endl;
     delete matrix;
 }
 
@@ -147,15 +148,21 @@ Matrix Matrix::operator%(const Matrix &matriz)
 
 void Matrix::operator=(const Matrix &matriz)
 {
-    for (int i = 0; i < this->getRows(); i++)
+    if (matriz.matrix != NULL)
     {
-        for (int j = 0; j < this->getCols(); j++)
+        delete this->matrix;
+        this->matrix = new vector<vector<double>>;
+        this->matrix->resize(matriz.getRows(), vector<double>(matriz.getCols(), 0.0));
+        for (int i = 0; i < matriz.getRows(); i++)
         {
-            this->matrix->at(i).at(j) = matriz.matrix->at(i).at(j);
+            for (int j = 0; j < matriz.getCols(); j++)
+            {
+                this->matrix->at(i).at(j) = matriz.matrix->at(i).at(j);
+            }
         }
+        this->n_cols = matriz.n_cols;
+        this->n_rows = matriz.n_rows;
     }
-    this->n_cols = matriz.n_cols;
-    this->n_rows = matriz.n_rows;
 }
 
 void Matrix::T()

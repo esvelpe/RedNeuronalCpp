@@ -65,7 +65,7 @@ NN::NN()
 
 NN::~NN()
 {
-    cout << "Entra al destructor" << endl;
+    cout << "Entra al destructorde NN" << endl;
     delete layers;
     delete weights;
     delete d_weights;
@@ -77,8 +77,9 @@ NN::~NN()
 
 void NN::add(Layer &layer)
 {
+    Layer layer_copy = layer;
     cout << "Entra a la función add" << endl;
-    this->layers->push_back(layer);
+    this->layers->push_back(layer_copy);
     this->numCapas++;
     cout << "Sale de la función add" << endl;
 }
