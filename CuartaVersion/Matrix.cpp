@@ -70,7 +70,7 @@ Matrix Matrix::operator*(const Matrix &matriz)
             {
                 for (int k = 0; k < n; k++)
                 {
-                    matriz_operacion.getMatrix()->at(i).at(j) += double(this->getMatrix()->at(i).at(k) * matriz.getMatrix()->at(k).at(j));
+                    matriz_operacion.getMatrix()->at(i).at(j) += this->getMatrix()->at(i).at(k) * matriz.getMatrix()->at(k).at(j);
                 }
             }
         }
@@ -92,7 +92,7 @@ Matrix Matrix::operator+(const Matrix &matriz)
         {
             for (int j = 0; j < this->getCols(); j++)
             {
-                matriz_operacion.getMatrix()->at(i).at(j) = double(this->getMatrix()->at(i).at(j) + matriz.getMatrix()->at(i).at(j));
+                matriz_operacion.getMatrix()->at(i).at(j) = (double)this->getMatrix()->at(i).at(j) + (double)matriz.getMatrix()->at(i).at(j);
             }
         }
         return matriz_operacion;
@@ -103,7 +103,7 @@ Matrix Matrix::operator+(const Matrix &matriz)
         {
             for (int j = 0; j < this->getCols(); j++)
             {
-                matriz_operacion.getMatrix()->at(i).at(j) = double(this->getMatrix()->at(i).at(j) + matriz.getMatrix()->at(j).at(0));
+                matriz_operacion.getMatrix()->at(i).at(j) = (double)this->getMatrix()->at(i).at(j) + (double)matriz.getMatrix()->at(j).at(0);
             }
         }
         return matriz_operacion;
@@ -115,6 +115,19 @@ Matrix Matrix::operator+(const Matrix &matriz)
     }
 }
 
+Matrix Matrix::operator-()
+{
+    Matrix operation(this->getCols(), this->getRows(), 0.0);
+    for (int i = 0; i < operation.getRows(); i++)
+    {
+        for (int j = 0; j < operation.getCols(); j++)
+        {
+            operation.getMatrix()->at(i).at(j) = -1.0 * this->getMatrix()->at(i).at(j);
+        }
+    }
+    return operation;
+}
+
 Matrix Matrix::operator-(const Matrix &matriz)
 {
     Matrix matriz_operacion(this->getCols(), this->getRows(), 0.0);
@@ -124,7 +137,7 @@ Matrix Matrix::operator-(const Matrix &matriz)
         {
             for (int j = 0; j < this->getCols(); j++)
             {
-                matriz_operacion.getMatrix()->at(i).at(j) = double(this->getMatrix()->at(i).at(j) - matriz.getMatrix()->at(i).at(j));
+                matriz_operacion.getMatrix()->at(i).at(j) = (double)this->getMatrix()->at(i).at(j) - (double)matriz.getMatrix()->at(i).at(j);
             }
         }
         return matriz_operacion;
@@ -135,7 +148,7 @@ Matrix Matrix::operator-(const Matrix &matriz)
         {
             for (int j = 0; j < this->getCols(); j++)
             {
-                matriz_operacion.getMatrix()->at(i).at(j) = double(this->getMatrix()->at(i).at(j) - matriz.getMatrix()->at(j).at(0));
+                matriz_operacion.getMatrix()->at(i).at(j) = (double)this->getMatrix()->at(i).at(j) - (double)matriz.getMatrix()->at(j).at(0);
             }
         }
         return matriz_operacion;
@@ -154,7 +167,7 @@ Matrix Matrix::operator%(const Matrix &matriz)
     {
         for (int j = 0; j < this->getCols(); j++)
         {
-            matriz_operacion.getMatrix()->at(i).at(j) = double(this->getMatrix()->at(i).at(j) * matriz.getMatrix()->at(i).at(j));
+            matriz_operacion.getMatrix()->at(i).at(j) = (double)this->getMatrix()->at(i).at(j) * matriz.getMatrix()->at(i).at(j);
         }
     }
     return matriz_operacion;

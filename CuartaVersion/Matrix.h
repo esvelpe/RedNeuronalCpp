@@ -1,3 +1,5 @@
+#ifndef MATRIX_H
+#define MATRIX_H
 #include <vector>
 
 using namespace std;
@@ -11,6 +13,7 @@ public:
     Matrix(vector<vector<double>> &);
     ~Matrix();
     Matrix T();
+    Matrix operator-();
     Matrix operator*(const Matrix &);
     Matrix operator+(const Matrix &);
     Matrix operator-(const Matrix &);
@@ -28,3 +31,5 @@ private:
     int n_cols;
     int n_rows;
 };
+
+#endif

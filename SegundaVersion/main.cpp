@@ -20,7 +20,6 @@ int main()
     Layer layer3(1, "sigmoid", 4);
     layer3.printWeights();
     model.add(layer1);
-    layer1.printWeights();
     model.add(layer2);
     model.add(layer3);
     cout << "sigue" << endl;

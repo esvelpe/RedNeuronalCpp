@@ -13,13 +13,13 @@ public:
     void add(Layer &);
     void compile();
     void train(Matrix &, Matrix &, double, int, int);
-    Matrix forward(Matrix &);
-    //  void predict(Matrix &);
-    //  void printWeights() const;
+    Matrix forwardProp(Matrix &);
     vector<Layer> *getLayers() const;
     vector<Matrix> *getBiases() const;
     vector<Matrix> *getWeights() const;
-    vector<Matrix> *getDz() const;
+    vector<Matrix> *getDWeights() const;
+    void updateWeights(int, double);
+    void updateBias(int, double);
     vector<Matrix (*)(Matrix &, bool)> *getFunctions() const;
     int getNumCapas() const;
 

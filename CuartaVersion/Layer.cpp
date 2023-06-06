@@ -22,7 +22,7 @@ Matrix sigmoid(Matrix &x, bool derivative = false)
         {
             for (int j = 0; j < cols; j++)
             {
-                out->at(i).at(j) = exp(-x.getMatrix()->at(i).at(j)) / (pow(exp(-x.getMatrix()->at(i).at(j)) + 1, 2));
+                out->at(i).at(j) = (double)exp(-x.getMatrix()->at(i).at(j)) / (pow(exp(-x.getMatrix()->at(i).at(j)) + 1, 2));
             }
         }
         Matrix output(*out);
@@ -35,7 +35,7 @@ Matrix sigmoid(Matrix &x, bool derivative = false)
         {
             for (int j = 0; j < cols; j++)
             {
-                out->at(i).at(j) = 1 / (1 + exp(-x.getMatrix()->at(i).at(j)));
+                out->at(i).at(j) = (double)1 / (1 + exp(-x.getMatrix()->at(i).at(j)));
             }
         }
         Matrix output(*out);
